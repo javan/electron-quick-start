@@ -2,18 +2,67 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Hello iframe?</title>
+    <style>
+      html, body {
+        padding: 0;
+        margin: 0;
+      }
+
+      .ua {
+        font-size: 11px;
+        font-family: monospace;
+        background: black;
+        color: white;
+        padding: 5px 20px;
+      }
+
+      nav {
+        margin-bottom: 20px;
+      }
+
+      main {
+        padding: 20px;
+      }
+    </style>
+    <script>
+      addEventListener("DOMContentLoaded", () => {
+        const listElement = document.getElementById("list")
+
+        new MutationObserver(mutations => {
+          for (const mutation of mutations) {
+            for (const node of mutation.addedNodes) {
+              console.log(`Node added: ${node.outerHTML}`)
+            }
+          }
+        }).observe(listElement, { childList: true })
+
+        function addListItem(html) {
+          const element = document.createElement("li")
+          element.innerHTML = html
+          listElement.append(element)
+        }
+
+        document.getElementById("add-nodes").addEventListener("click", () => {
+          addListItem(`<strong>a</strong> <em>b</em> <span>c</span>`)
+        })
+
+        document.getElementById("add-nodes-with-iframe").addEventListener("click", () => {
+          addListItem(`<code>iframe</code> → <iframe height="10"></iframe>`)
+        })
+      })
+    </script>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <div class="ua"><script>document.write(navigator.userAgent)</script></div>
 
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
-    </script>
+    <main>
+      <nav>
+        <button id="add-nodes">Add nodes</button>
+        <button id="add-nodes-with-iframe">Add nodes with &lt;iframe&gt;</button>
+      </nav>
+
+      <ol id="list"></ol>
+    </main>
   </body>
 </html>
