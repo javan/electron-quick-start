@@ -3,13 +3,63 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        font-family: monospace;
+      }
+
+      webview {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 5;
+      }
+
+      .info {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 10;
+        width: 200px;
+        background-color: white;
+        border: 1px solid #333;
+        border-radius: 3px;
+        padding: 10px;
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <div class="info">
+      <p><strong>Electron <script>document.write(process.versions.electron)</script></strong></p>
+      <pre>    wheel events: <strong id="wheel-event-count">0</strong></pre>
+      <pre>mousemove events: <strong id="mousemove-event-count">0</strong></pre>
+    </div>
+
+    <webview src="https://electronjs.org"></webview>
+
+    <script>
+      addEventListener("DOMContentLoaded", () => {
+        const wheelEventCountElement = document.getElementById("wheel-event-count")
+        const mousemoveEventCountElement = document.getElementById("mousemove-event-count")
+
+        let wheelEventCount = 0
+        let mousemoveEventCount = 0
+
+        addEventListener("wheel", () => {
+          wheelEventCountElement.textContent = ++wheelEventCount
+        })
+
+        addEventListener("mousemove", () => {
+          mousemoveEventCountElement.textContent = ++mousemoveEventCount
+        })
+      })
+    </script>
 
     <script>
       // You can also require other files to run in this process
