@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script>
+      addEventListener("click", event => {
+        const { templateIndex } = event.target.dataset
+        if (templateIndex) {
+          const template = document.querySelectorAll("template")[templateIndex]
+          const main = document.querySelector("main")
+          main.innerHTML = ""
+          main.appendChild(template.content.cloneNode(true))
+        }
+      })
+    </script>
+  </head>
+  <body>
+    <p>
+      <button data-template-index="0">Embed 1</button>
+      <button data-template-index="1">Embed 2</button>
+    </p>
+
+    <main></main>
+
+    <template>
+      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">🎉 Electron is moving to release a new major stable version every 12 weeks! 🎉<a href="https://t.co/rzxa3JMcHe">https://t.co/rzxa3JMcHe</a></p>&mdash; Electron (@electronjs) <a href="https://twitter.com/electronjs/status/1128338877708623873?ref_src=twsrc%5Etfw">May 14, 2019</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </template>
+    <template>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/kN1Czs0m1SU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </template>
+  </body>
+</html>
