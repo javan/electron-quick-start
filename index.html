@@ -3,14 +3,21 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <style>
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 2em;
+        padding: 0.2em;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
+    <p>We are using Node.js <span id="node-version"></span>,
     Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    and Electron <strong id="electron-version"></strong>.</p>
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
+    <p><input type="text" autofocus></p>
   </body>
 </html>
